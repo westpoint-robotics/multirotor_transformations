@@ -1,11 +1,10 @@
 <launch>
     
-    <arg name="optitrack_pose_topic" default="pose_stamped" />
-    <arg name="transform_stamped_topic" default="transform_stamped" />
+    <arg name="tracker_name" default="f550" />
     
-    <node name="optitrack_pose_to_transform_stamped" pkg="misc_transformations" type="optitrack_pose_to_transform_stamped_node" output="screen" >
-        <remap from="optitrack_pose" to="$(arg optitrack_pose_topic)" />
-        <remap from="transform_stamped" to="$(arg transform_stamped_topic)" />
+    <node name="optitrack_pose_to_transform_stamped" pkg="misc_transformations" type="optitrack_pose_to_transform_stamped_node" output="screen" ns="$(arg tracker_name)" >
+        <remap from="optitrack_pose" to="/vrpn_client_node/$(arg tracker_name)/pose" />
+        <remap from="transform_stamped" to="optitrack/pose" />
     </node>
     
 </launch>
