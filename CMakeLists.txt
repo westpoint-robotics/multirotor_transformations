@@ -8,12 +8,12 @@ catkin_simple(ALL_DEPS_REQUIRED)
 #  cfg/
 #)
 
-include_directories(${catkin_INCLUDE_DIRS})
+include_directories(${catkin_INCLUDE_DIRS} include)
 
 cs_add_library(OptitrackPoseToTransformStamped src/OptitrackPoseToTransformStamped.cpp)
 target_link_libraries(OptitrackPoseToTransformStamped ${catkin_LIBRARIES})
 
-cs_add_executable(optitrack_pose_to_transform_stamped_node src/optitrack_pose_to_transform_stamped_node.cpp)
+cs_add_executable(optitrack_pose_to_transform_stamped_node nodes/optitrack_pose_to_transform_stamped_node.cpp)
 target_link_libraries(optitrack_pose_to_transform_stamped_node OptitrackPoseToTransformStamped ${catkin_LIBRARIES})
 
 cs_install()
