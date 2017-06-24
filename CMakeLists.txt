@@ -22,5 +22,11 @@ target_link_libraries(Px4ImuTransform ${catkin_LIBRARIES})
 cs_add_executable(px4_imu_transform_node nodes/px4_imu_transform_node.cpp)
 target_link_libraries(px4_imu_transform_node Px4ImuTransform ${catkin_LIBRARIES})
 
+cs_add_library(RcToJoy src/RcToJoy.cpp)
+target_link_libraries(RcToJoy ${catkin_LIBRARIES})
+
+cs_add_executable(rc_to_joy_node nodes/rc_to_joy_node.cpp)
+target_link_libraries(rc_to_joy_node RcToJoy ${catkin_LIBRARIES})
+
 cs_install()
 cs_export()
