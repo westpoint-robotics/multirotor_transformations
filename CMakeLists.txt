@@ -16,5 +16,11 @@ target_link_libraries(OptitrackPoseToTransformStamped ${catkin_LIBRARIES})
 cs_add_executable(optitrack_pose_to_transform_stamped_node nodes/optitrack_pose_to_transform_stamped_node.cpp)
 target_link_libraries(optitrack_pose_to_transform_stamped_node OptitrackPoseToTransformStamped ${catkin_LIBRARIES})
 
+cs_add_library(Px4ImuTransform src/Px4ImuTransform.cpp)
+target_link_libraries(Px4ImuTransform ${catkin_LIBRARIES})
+
+cs_add_executable(px4_imu_transform_node nodes/px4_imu_transform_node.cpp)
+target_link_libraries(px4_imu_transform_node Px4ImuTransform ${catkin_LIBRARIES})
+
 cs_install()
 cs_export()

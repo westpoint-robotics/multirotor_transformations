@@ -1,0 +1,12 @@
+<launch>
+    
+    <arg name="tracker_name" default="f550" />
+    
+    <node name="optitrack_pose_to_transform_stamped" pkg="misc_transformations" type="optitrack_pose_to_transform_stamped_node" output="screen" ns="$(arg tracker_name)" >
+        <remap from="optitrack_pose" to="/vrpn_client_node/$(arg tracker_name)/pose" />
+        <remap from="transform_stamped" to="optitrack/pose" />
+    </node>
+
+    <node name="px4_imu_transform" pkg="misc_transformations" type="px4_imu_transform_node" output="screen" ns="$(arg tracker_name)" />
+        
+</launch>
