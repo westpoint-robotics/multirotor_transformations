@@ -29,11 +29,11 @@ void Px4ImuTransform::imuCallback(const sensor_msgs::Imu &msg) {
   // copy all data to new message
   imu_msg = msg;
 
-  // PX4 Mavros ACC frame (SEU)! to PX4 body frame (NED)
+  // PX4 Mavros ACC frame (NWU)! to PX4 body frame (NED)
   // since we just change the sign of y and y axis, we don't have to change covariance 
   // acceleration
-  imu_msg.linear_acceleration.x = -msg.linear_acceleration.x;
-  imu_msg.linear_acceleration.y = msg.linear_acceleration.y;
+  imu_msg.linear_acceleration.x = msg.linear_acceleration.x;
+  imu_msg.linear_acceleration.y = -msg.linear_acceleration.y;
   imu_msg.linear_acceleration.z = -msg.linear_acceleration.z;
 
   // angular velocity 
