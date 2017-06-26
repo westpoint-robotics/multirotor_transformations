@@ -2,7 +2,6 @@
     
     <arg name="namespace" default="px4" />
     
-    <node name="rc_to_joy" pkg="misc_transformations" type="rc_to_joy_node" output="screen" ns="$(arg namespace)" >
-            </node>
+    <node name="rc_to_joy" pkg="misc_transformations" type="rc_to_joy_node" output="screen" ns="$(arg namespace)" />
     
 </launch>

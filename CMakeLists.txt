@@ -28,5 +28,11 @@ target_link_libraries(RcToJoy ${catkin_LIBRARIES})
 cs_add_executable(rc_to_joy_node nodes/rc_to_joy_node.cpp)
 target_link_libraries(rc_to_joy_node RcToJoy ${catkin_LIBRARIES})
 
+cs_add_library(MpcToPx4Command src/MpcToPx4Command.cpp)
+target_link_libraries(MpcToPx4Command ${catkin_LIBRARIES})
+
+cs_add_executable(mpc_to_px4_command_node nodes/mpc_to_px4_command_node.cpp)
+target_link_libraries(mpc_to_px4_command_node MpcToPx4Command ${catkin_LIBRARIES})
+
 cs_install()
 cs_export()

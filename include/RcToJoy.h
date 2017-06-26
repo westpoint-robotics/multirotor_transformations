@@ -16,8 +16,8 @@
 
 struct rc_channels
 {
-  static const float RC_CHANNEL_VALUE_MAX = 1900.0f;             //!< Maximum value of the rc channels.
-  static const float RC_CHANNEL_VALUE_MIN = 1100.0f;             //!< Minimum value of the rc channels.
+  static constexpr float RC_CHANNEL_VALUE_MAX = 1900.0f;             //!< Maximum value of the rc channels.
+  static constexpr float RC_CHANNEL_VALUE_MIN = 1100.0f;             //!< Minimum value of the rc channels.
 
   static const uint8_t RC_CHANNEL_THROTTLE = 2;               //!< Rc channel number used for throttle control
   static const uint8_t RC_CHANNEL_ROLL = 0;                   //!< Rc channel number used for roll control
@@ -31,8 +31,8 @@ struct rc_channels
 struct joy_axes
 {
 
-  static const float JOY_AXIS_VALUE_MAX = 1.0f;           //!< Maximum value of joy axis.
-  static const float JOY_AXIS_VALUE_MIN = -1.0f;          //!< Minimum value of joy axis.
+  static constexpr float JOY_AXIS_VALUE_MAX = 1.0f;           //!< Maximum value of joy axis.
+  static constexpr float JOY_AXIS_VALUE_MIN = -1.0f;          //!< Minimum value of joy axis.
 
   static const uint8_t JOY_AXIS_THROTTLE = 2;             //!< Joy axis number used for throttle control
   static const uint8_t JOY_AXIS_ROLL = 1;                 //!< Joy axis number used for roll control
@@ -85,4 +85,4 @@ public:
     uint8_t joy_button_rc_on_;  
 };
 
-#endif /* RCTOJOYTRANSFORM_H_ */
+#endif /* RCTOJOY_H_ */

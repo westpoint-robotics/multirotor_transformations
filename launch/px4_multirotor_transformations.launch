@@ -8,5 +8,7 @@
     </node>
 
     <node name="px4_imu_transform" pkg="misc_transformations" type="px4_imu_transform_node" output="screen" ns="$(arg tracker_name)" />
+
+    <node name="rc_to_joy" pkg="misc_transformations" type="rc_to_joy_node" output="screen" ns="$(arg tracker_name)" />
         
 </launch>
