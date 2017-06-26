@@ -1,7 +1,10 @@
 <launch>
     
-    <arg name="namespace" default="px4" />
+    <arg name="input_namespace" default="px4" />
+    <arg name="output_namespace" default="px4" />
     
-    <node name="rc_to_joy" pkg="misc_transformations" type="rc_to_joy_node" output="screen" ns="$(arg namespace)" />
+    <node name="rc_to_joy" pkg="multirotor_transformations" type="rc_to_joy_node" output="screen" ns="$(arg output_namespace)">
+    	<remap from="mavros/rc/in" to="/$(arg input_namespace)/mavros/rc/in" />
+    </node>
     
 </launch>

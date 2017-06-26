@@ -2,10 +2,6 @@
     
     <arg name="namespace" default="px4" />
     
-    <node name="mpc_to_px4_command" pkg="misc_transformations" type="mpc_to_px4_command_node" output="screen" ns="$(arg namespace)">
-          <remap from="setpoint_attitude/attitude" to="/mavros/setpoint_attitude/attitude" />
-          <remap from="setpoint_attitude/att_throttle" to="/mavros/setpoint_attitude/att_throttle" />
-
-    </node>
+    <node name="mpc_to_px4_command" pkg="multirotor_transformations" type="mpc_to_px4_command_node" output="screen" ns="$(arg namespace)"/>
     
 </launch>
