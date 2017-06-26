@@ -36,23 +36,27 @@ void RcToJoy::setJoyPublisher(ros::Publisher joy_pub) {
 
 void RcToJoy::rcCallback(const mavros_msgs::RCIn &msg) {
 
-  sensor_msgs::Joy joy_msg;
-  std::vector<float> axis_array(12, 0); // length 12, init to 0
-  std::vector<int> button_array(12, 0); // length 12, init to 0
-  
-  joy_msg.axes = axis_array;
-  joy_msg.buttons = button_array;
+  // first check is rc msg contains any channel value
+  if (msg.channels.size() > 0) {
 
-  joy_msg.header = msg.header;
-  joy_msg.axes[joy_axis_throttle_] = rcChannelToJoyAxis(msg.channels[rc_channel_throttle_]);
-  joy_msg.axes[joy_axis_roll_] = rcChannelToJoyAxis(msg.channels[rc_channel_roll_]);
-  joy_msg.axes[joy_axis_pitch_] = rcChannelToJoyAxis(msg.channels[rc_channel_pitch_]);
-  joy_msg.axes[joy_axis_yaw_] = rcChannelToJoyAxis(msg.channels[rc_channel_yaw_]);
-  joy_msg.axes[joy_axis_mode_] = rcChannelToJoyAxis(msg.channels[rc_channel_mode_]);
-  joy_msg.buttons[joy_button_rc_on_] = rcChannelToJoyButton(msg.channels[rc_channel_rc_on_]);
+    sensor_msgs::Joy joy_msg;
+    std::vector<float> axis_array(12, 0); // length 12, init to 0
+    std::vector<int> button_array(12, 0); // length 12, init to 0
+    
+    joy_msg.axes = axis_array;
+    joy_msg.buttons = button_array;
 
-  joy_msg.header.stamp = ros::Time::now();
-  joy_pub_.publish(joy_msg);
+    joy_msg.header = msg.header;
+    joy_msg.axes[joy_axis_throttle_] = rcChannelToJoyAxis(msg.channels[rc_channel_throttle_]);
+    joy_msg.axes[joy_axis_roll_] = rcChannelToJoyAxis(msg.channels[rc_channel_roll_]);
+    joy_msg.axes[joy_axis_pitch_] = rcChannelToJoyAxis(msg.channels[rc_channel_pitch_]);
+    joy_msg.axes[joy_axis_yaw_] = rcChannelToJoyAxis(msg.channels[rc_channel_yaw_]);
+    joy_msg.axes[joy_axis_mode_] = rcChannelToJoyAxis(msg.channels[rc_channel_mode_]);
+    joy_msg.buttons[joy_button_rc_on_] = rcChannelToJoyButton(msg.channels[rc_channel_rc_on_]);
+
+    joy_msg.header.stamp = ros::Time::now();
+    joy_pub_.publish(joy_msg);
+  }
 
 }
 
