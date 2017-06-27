@@ -1,14 +1,22 @@
 <launch>
     
     <arg name="tracker_name" default="f550" />
+    <arg name="thrust_max" default="32" />
     
     <node name="optitrack_pose_to_transform_stamped" pkg="multirotor_transformations" type="optitrack_pose_to_transform_stamped_node" output="screen" ns="$(arg tracker_name)" >
         <remap from="optitrack_pose" to="/vrpn_client_node/$(arg tracker_name)/pose" />
         <remap from="transform_stamped" to="optitrack/pose" />
     </node>
 
-    <node name="px4_imu_transform" pkg="multirotor_transformations" type="px4_imu_transform_node" output="screen" ns="$(arg tracker_name)" />
+    <!--node name="px4_imu_transform" pkg="multirotor_transformations" type="px4_imu_transform_node" output="screen" ns="$(arg tracker_name)" /-->
 
-    <node name="rc_to_joy" pkg="multirotor_transformations" type="rc_to_joy_node" output="screen" ns="$(arg tracker_name)" />
-        
+ 	<!--node name="rc_to_joy" pkg="multirotor_transformations" type="rc_to_joy_node" output="screen" ns="$(arg tracker_name)"/-->
+
+ 	<node name="px4_offboard_command" pkg="multirotor_transformations" type="px4_offboard_command_node" output="screen" ns="$(arg tracker_name)"/>
+
+ 	<include file="$(find multirotor_transformations)/launch/mpc_to_px4_command.launch">
+      <arg name="namespace" value="$(arg tracker_name)" />
+      <arg name="thrust_max" value="$(arg thrust_max)" />
+    </include>
+    
 </launch>

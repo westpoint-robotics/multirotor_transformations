@@ -34,5 +34,11 @@ target_link_libraries(MpcToPx4Command ${catkin_LIBRARIES})
 cs_add_executable(mpc_to_px4_command_node nodes/mpc_to_px4_command_node.cpp)
 target_link_libraries(mpc_to_px4_command_node MpcToPx4Command ${catkin_LIBRARIES})
 
+cs_add_library(Px4OffboardCommand src/Px4OffboardCommand.cpp)
+target_link_libraries(Px4OffboardCommand ${catkin_LIBRARIES})
+
+cs_add_executable(px4_offboard_command_node nodes/px4_offboard_command_node.cpp)
+target_link_libraries(px4_offboard_command_node Px4OffboardCommand ${catkin_LIBRARIES})
+
 cs_install()
 cs_export()
