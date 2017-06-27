@@ -10,9 +10,9 @@
 
     <!--node name="px4_imu_transform" pkg="multirotor_transformations" type="px4_imu_transform_node" output="screen" ns="$(arg tracker_name)" /-->
 
- 	<!--node name="rc_to_joy" pkg="multirotor_transformations" type="rc_to_joy_node" output="screen" ns="$(arg tracker_name)"/-->
+ 	<node name="rc_to_joy" pkg="multirotor_transformations" type="rc_to_joy_node" output="screen" ns="$(arg tracker_name)"/>
 
- 	<node name="px4_offboard_command" pkg="multirotor_transformations" type="px4_offboard_command_node" output="screen" ns="$(arg tracker_name)"/>
+ 	<!--node name="px4_offboard_command" pkg="multirotor_transformations" type="px4_offboard_command_node" output="screen" ns="$(arg tracker_name)"/-->
 
  	<include file="$(find multirotor_transformations)/launch/mpc_to_px4_command.launch">
       <arg name="namespace" value="$(arg tracker_name)" />
