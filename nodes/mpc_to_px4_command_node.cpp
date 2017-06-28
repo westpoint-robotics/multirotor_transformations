@@ -22,9 +22,11 @@ int main(int argc, char **argv)
 
   ros::Publisher px4_attitude_cmd_pub = n.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_attitude/attitude", 1);
   ros::Publisher px4_thrust_cmd_pub = n.advertise<std_msgs::Float64>("mavros/setpoint_attitude/att_throttle", 1);
+  ros::Publisher px4_angular_vel_cmd_pub = n.advertise<geometry_msgs::TwistStamped>("mavros/setpoint_attitude/cmd_vel", 1);
 
   transform_node->setPx4AttitudeCmdPublisher(px4_attitude_cmd_pub);
   transform_node->setPx4ThrustCmdPublisher(px4_thrust_cmd_pub);
+  transform_node->setPx4AngularVelCmdPublisher(px4_angular_vel_cmd_pub);
 
   private_node_handle_.getParam("thrust_max", thrust_max);
   

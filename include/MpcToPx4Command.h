@@ -11,6 +11,7 @@
 #include "ros/ros.h"
 #include "mav_msgs/RollPitchYawrateThrust.h"
 #include "geometry_msgs/PoseStamped.h"
+#include "geometry_msgs/TwistStamped.h"
 #include "std_msgs/Float64.h"
 #include "sensor_msgs/Imu.h"
 #include <tf/transform_broadcaster.h>
@@ -29,12 +30,15 @@ public:
     
     void setPx4AttitudeCmdPublisher(ros::Publisher publisher);
     void setPx4ThrustCmdPublisher(ros::Publisher publisher);
+    void setPx4AngularVelCmdPublisher(ros::Publisher publisher);
     void setMaxThrust(float thrust_max);
  
  private:   
  
     ros::Publisher px4_attitude_cmd_pub_;
     ros::Publisher px4_thrust_cmd_pub_;
+    ros::Publisher px4_angular_vel_cmd_pub_;
+
     float thrust_max_;
     float yaw_imu_;
 };
