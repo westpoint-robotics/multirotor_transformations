@@ -27,10 +27,12 @@ public:
     void optitrackPoseCallback(const geometry_msgs::PoseStamped &msg);
     
     void setTransformStampedPublisher(ros::Publisher publisher);
+    void setPoseStampedPublisher(ros::Publisher publisher);
  
  private:   
     
     ros::Publisher transform_stamped_pub_;
+    ros::Publisher pose_stamped_pub_;
 };
 
 #endif /* OPTITRACKPOSETOTRANSFORMSTAMPED_H_ */

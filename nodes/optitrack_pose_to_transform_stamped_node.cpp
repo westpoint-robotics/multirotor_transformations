@@ -19,8 +19,12 @@ int main(int argc, char **argv)
 
   // remap this topic on runtime
   ros::Publisher transform_stamped_pub = n.advertise<geometry_msgs::TransformStamped>("transform_stamped", 1);
+  //ros::Publisher pose_stamped_pub = n.advertise<geometry_msgs::PoseStamped>("mavros/mocap/pose", 1);
+
 
   transform_node->setTransformStampedPublisher(transform_stamped_pub);
+  //transform_node->setPoseStampedPublisher(pose_stamped_pub);
+
 
   // Main loop.
   while (n.ok())

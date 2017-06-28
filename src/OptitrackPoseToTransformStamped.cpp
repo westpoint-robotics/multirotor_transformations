@@ -20,10 +20,17 @@ void OptitrackPoseToTransformStamped::setTransformStampedPublisher(ros::Publishe
         transform_stamped_pub_ = transform_stamped_pub;
 }
 
+void OptitrackPoseToTransformStamped::setPoseStampedPublisher(ros::Publisher pose_stamped_pub) {
+        pose_stamped_pub_ = pose_stamped_pub;
+}
+
+
 
 void OptitrackPoseToTransformStamped::optitrackPoseCallback(const geometry_msgs::PoseStamped &msg) {
 
   geometry_msgs::TransformStamped transform_stamped_msg;
+  geometry_msgs::PoseStamped pose_stamped_msg;
+
 
   // Optitrack frame (ENU) to PX4 body frame (NWU) 
 
@@ -39,4 +46,17 @@ void OptitrackPoseToTransformStamped::optitrackPoseCallback(const geometry_msgs:
   transform_stamped_msg.header = msg.header;
   transform_stamped_pub_.publish(transform_stamped_msg);
 
+  /*
+  pose_stamped_msg.pose.position.x = msg.pose.position.y;
+  pose_stamped_msg.pose.position.y = -msg.pose.position.x;
+  pose_stamped_msg.pose.position.z = msg.pose.position.z;
+
+  pose_stamped_msg.pose.orientation.x = -msg.pose.orientation.y;
+  pose_stamped_msg.pose.orientation.y = msg.pose.orientation.x;
+  pose_stamped_msg.pose.orientation.z = -msg.pose.orientation.z;
+  pose_stamped_msg.pose.orientation.w = -msg.pose.orientation.w;
+
+  pose_stamped_msg.header = msg.header;
+  pose_stamped_pub_.publish(pose_stamped_msg);
+  */
 }
