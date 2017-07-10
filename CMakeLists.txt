@@ -40,5 +40,17 @@ target_link_libraries(Px4OffboardCommand ${catkin_LIBRARIES})
 cs_add_executable(px4_offboard_command_node nodes/px4_offboard_command_node.cpp)
 target_link_libraries(px4_offboard_command_node Px4OffboardCommand ${catkin_LIBRARIES})
 
+cs_add_library(OdometryFilter src/OdometryFilter.cpp)
+target_link_libraries(OdometryFilter ${catkin_LIBRARIES})
+
+cs_add_executable(odometry_filter_node nodes/odometry_filter_node.cpp)
+target_link_libraries(odometry_filter_node OdometryFilter ${catkin_LIBRARIES})
+
+cs_add_library(MarkerOptitrack src/MarkerOptitrack.cpp)
+target_link_libraries(MarkerOptitrack ${catkin_LIBRARIES})
+
+cs_add_executable(marker_optitrack_node nodes/marker_optitrack_node.cpp)
+target_link_libraries(marker_optitrack_node MarkerOptitrack ${catkin_LIBRARIES})
+
 cs_install()
 cs_export()
