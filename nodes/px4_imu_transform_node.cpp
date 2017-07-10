@@ -15,7 +15,7 @@ int main(int argc, char **argv)
   Px4ImuTransform *transform_node = new Px4ImuTransform();
 
   // remap this topic runtime
-  ros::Subscriber pose_stamped_sub = n.subscribe("mavros/imu/data", 1, &Px4ImuTransform::imuCallback, transform_node);
+  ros::Subscriber pose_stamped_sub = n.subscribe("mavros/imu/data", 1, &Px4ImuTransform::imuCallback, transform_node, ros::TransportHints().tcpNoDelay());
 
   // remap this topic on runtime
   ros::Publisher imu_transformed_pub = n.advertise<sensor_msgs::Imu>("px4/imu", 1);

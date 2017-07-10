@@ -17,8 +17,8 @@ int main(int argc, char **argv)
 
   ros::NodeHandle private_node_handle_("~");
 
-  ros::Subscriber mpc_cmd_sub = n.subscribe("command/roll_pitch_yawrate_thrust", 1, &MpcToPx4Command::mpcCmdCallback, transform_node);
-  ros::Subscriber imu_sub = n.subscribe("mavros/imu/data", 1, &MpcToPx4Command::imuCallback, transform_node);
+  ros::Subscriber mpc_cmd_sub = n.subscribe("command/roll_pitch_yawrate_thrust", 1, &MpcToPx4Command::mpcCmdCallback, transform_node, ros::TransportHints().tcpNoDelay());
+  ros::Subscriber imu_sub = n.subscribe("mavros/imu/data", 1, &MpcToPx4Command::imuCallback, transform_node, ros::TransportHints().tcpNoDelay());
 
   ros::Publisher px4_attitude_cmd_pub = n.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_attitude/attitude", 1);
   ros::Publisher px4_thrust_cmd_pub = n.advertise<std_msgs::Float64>("mavros/setpoint_attitude/att_throttle", 1);

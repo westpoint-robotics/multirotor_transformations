@@ -15,7 +15,7 @@ int main(int argc, char **argv)
   OptitrackPoseToTransformStamped *transform_node = new OptitrackPoseToTransformStamped();
 
   // remap this topic runtime
-  ros::Subscriber pose_stamped_sub = n.subscribe("optitrack_pose", 1, &OptitrackPoseToTransformStamped::optitrackPoseCallback, transform_node);
+  ros::Subscriber pose_stamped_sub = n.subscribe("optitrack_pose", 1, &OptitrackPoseToTransformStamped::optitrackPoseCallback, transform_node, ros::TransportHints().tcpNoDelay());
 
   // remap this topic on runtime
   ros::Publisher transform_stamped_pub = n.advertise<geometry_msgs::TransformStamped>("transform_stamped", 1);
