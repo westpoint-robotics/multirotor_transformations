@@ -1,0 +1,12 @@
+<launch>
+    
+    <arg name="namespace" default="f550" />
+    <arg name="filter_time_constant" default="0.2" />
+    <arg name="filter_sampling_time" default="0.02" />
+    
+    <node name="odometry_filter" pkg="multirotor_transformations" type="odometry_filter_node" output="screen" ns="$(arg namespace)">
+    	<param name="filter_time_constant" value="$(arg filter_time_constant)"/>
+    	<param name="filter_sampling_time" value="$(arg filter_sampling_time)"/>
+    </node>
+    
+</launch>
