@@ -53,7 +53,11 @@ void MpcToPx4Command::mpcCmdCallback(const mav_msgs::RollPitchYawrateThrust &msg
   //transform roll, pitch , yaw to quaternion
   // to ensure bumpless transfer between different modes for yaw use measured yaw (from imu)
   tf::Quaternion quaternion;
-  quaternion.setEulerZYX(yaw_imu_, msg.pitch, msg.roll);
+  tf::Matrix3x3 m;
+  m.setEulerYPR(yaw_imu_, msg.pitch, msg.roll);
+  m.getRotation(quaternion);
+
+  //quaternion.setEulerZYX(yaw_imu_, msg.pitch, msg.roll);
 
   attitude_msg.header = msg.header;
   attitude_msg.pose.orientation.x  = quaternion.x();
@@ -82,7 +86,7 @@ void MpcToPx4Command::imuCallback(const sensor_msgs::Imu &msg) {
   // transform quaternion to euler
   tf::Quaternion quaternion_imu(msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w);
   tf::Matrix3x3 m(quaternion_imu);
-  m.getRPY(roll, pitch, yaw);
+  m.getEulerYPR(yaw, pitch, roll);
   yaw_imu_ = yaw;
 
 }
