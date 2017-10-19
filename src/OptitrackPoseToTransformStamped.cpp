@@ -24,7 +24,9 @@ void OptitrackPoseToTransformStamped::setPoseStampedPublisher(ros::Publisher pos
         pose_stamped_pub_ = pose_stamped_pub;
 }
 
-
+void OptitrackPoseToTransformStamped::setMarkerName(std::string name) {
+        marker_name_ = name;
+}
 
 void OptitrackPoseToTransformStamped::optitrackPoseCallback(const geometry_msgs::PoseStamped &msg) {
 
@@ -46,7 +48,7 @@ void OptitrackPoseToTransformStamped::optitrackPoseCallback(const geometry_msgs:
   transform_stamped_msg.header = msg.header;
   transform_stamped_pub_.publish(transform_stamped_msg);
 
-  /*
+  
   pose_stamped_msg.pose.position.x = msg.pose.position.y;
   pose_stamped_msg.pose.position.y = -msg.pose.position.x;
   pose_stamped_msg.pose.position.z = msg.pose.position.z;
@@ -58,5 +60,12 @@ void OptitrackPoseToTransformStamped::optitrackPoseCallback(const geometry_msgs:
 
   pose_stamped_msg.header = msg.header;
   pose_stamped_pub_.publish(pose_stamped_msg);
-  */
+
+  // publish tf betweee world and marker frame in the NWU frame
+
+  transform_.setOrigin(tf::Vector3(pose_stamped_msg.pose.position.x, pose_stamped_msg.pose.position.y, pose_stamped_msg.pose.position.z));
+  tf::Quaternion q(pose_stamped_msg.pose.orientation.x, pose_stamped_msg.pose.orientation.y, pose_stamped_msg.pose.orientation.z, pose_stamped_msg.pose.orientation.w);
+  transform_.setRotation(q);
+  tf_broadcaster_.sendTransform(tf::StampedTransform(transform_, ros::Time::now(), "world", (marker_name_ + std::string("_nwu")).c_str()));
+  
 }

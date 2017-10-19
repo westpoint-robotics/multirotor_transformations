@@ -28,11 +28,15 @@ public:
     
     void setTransformStampedPublisher(ros::Publisher publisher);
     void setPoseStampedPublisher(ros::Publisher publisher);
+    void setMarkerName(std::string name);
  
  private:   
     
     ros::Publisher transform_stamped_pub_;
     ros::Publisher pose_stamped_pub_;
+    std::string marker_name_;
+    tf::TransformBroadcaster tf_broadcaster_;
+  	tf::Transform transform_;
 };
 
 #endif /* OPTITRACKPOSETOTRANSFORMSTAMPED_H_ */
